@@ -13,13 +13,11 @@ Requires Python 3 with the packages in `requirements.txt` (`pip install -r requi
 
 - **Excluded post-issuance columns** (e.g. `recoveries`, `total_pymnt`, `last_pymnt_d`) to prevent data leakage — these fields are only populated after a loan's outcome is known, so including them would let the model "cheat."
 - **Excluded loans with `loan_status = 'Current'`** since their eventual outcome isn't known yet.
-- **Column selection happens in SQL** (`loans_clean` view), not at the pandas load step — keeps the "what matters and why" reasoning next to the query itself, and keeps the raw table available for later checks.
 - **Dropped rows missing `annual_inc`, `dti`, or `revol_util`** rather than imputing — these are risk-relevant numeric fields where a guessed value could mislead the model; targeted rather than blanket `dropna()`.
 - **Used `class_weight='balanced'` / `scale_pos_weight`** to counter the ~80/20 class imbalance between paid and defaulted loans.
 - **Evaluated on precision, recall, and ROC-AUC instead of accuracy**, since accuracy is misleading on imbalanced data (see Results above).
 - **Standardized features for logistic regression, but not for XGBoost** — tree-based models split on raw thresholds and are scale-invariant, so scaling only matters for the linear model.
 - **Compared a linear baseline against a boosted model** rather than jumping straight to the strongest option, to make the improvement from XGBoost demonstrable rather than assumed.
-markdown
 
 ## Results
 
@@ -34,7 +32,7 @@ Accuracy isn't reported as the headline metric — defaults make up only ~20% of
 
 ## Tableau Dashboard
 
-**[Try the interactive dashboard on Tableau Public →](https://public.tableau.com/views/loans_workbook/Dashboard1?:language=en-GB&:sid=&:display_count=n&:origin=viz_share_link)**  
+**[Try the interactive dashboard on Tableau Public](https://public.tableau.com/views/loans_workbook/Dashboard1?:language=en-GB&:sid=&:display_count=n&:origin=viz_share_link)**  
 
 A simple dashboard showing three charts.
 
