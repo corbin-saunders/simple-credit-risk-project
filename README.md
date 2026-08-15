@@ -2,7 +2,7 @@
 
 ## Setup
 
-1. Download the [Lending Club dataset](https://www.kaggle.com/datasets/adarshsng/lending-club-loan-data-csv) from Kaggle and place `loan.csv` in a `data/` folder at the project root.
+1. Download the [Lending Club dataset](https://www.kaggle.com/datasets/adarshsng/lending-club-loan-data-csv) from Kaggle and place `loan.csv` in the `data/` folder at the project root.
 2. Run `code/load_data.py` to load the CSV into a local SQLite database (`data/loans.db`).
 3. Open `data/loans.db` in [DB Browser for SQLite](https://sqlitebrowser.org) and run `code/sql/03_create_view_loans_clean.sql`, then click **Write Changes**.
 4. Open `code/model_and_eval.ipynb` and run all cells.
