@@ -1,4 +1,6 @@
-data/
+loan.csv
+loans.db
+LCDataDictionary.xlsx
 venv/
 *.twb
 *.twbx
